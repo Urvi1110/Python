@@ -1,0 +1,105 @@
+total_amount = 0
+def write(name,amount):
+    name = name
+    amount = amount
+    global total_amount
+    total_amount += amount
+    try:
+        with open("Expense_Tracker.txt","w") as file:
+            file.write(f"Name : {name} amount : {amount}")
+    except FileNotFoundError:
+        print("Error: The requested file could not be found.")
+
+def read():
+    try:
+        with open("Expense_Tracker.txt","r") as file:
+            details = file.read()
+            print(details)
+    except FileNotFoundError:
+        print("Error: The requested file could not be found.")
+
+def search(name):
+    try:
+        with open("Expense_Tracker.txt","r") as file:
+            if name in file:
+                details = file.read()
+                print(details)
+            else:
+                print("this data not exists in file")
+    except FileNotFoundError:
+        print("Error: The requested file could not be found.")
+
+def total():
+    try:
+        with open("Expense_Tracker.txt","r") as file:
+            file.read()
+            global total_amount
+            print(total_amount)
+    except FileNotFoundError:
+        print("Error: The requested file could not be found.")
+
+def append(name,amount):
+    name = name
+    amount = amount
+    global total_amount
+    total_amount += amount
+
+    try:
+        with open("Expense_Tracker.txt","a") as file:
+            file.write(f"\nName : {name} amount : {amount}")
+    except FileNotFoundError:
+            print("Error: The requested file could not be found.")
+    
+
+def delete(name):
+    try:
+        with open("Expense_Tracker.txt","r") as file:
+            if name in file:
+                for line in file:
+                    line.strip()
+            else:
+                print("this data not exists in file")
+    except FileNotFoundError:
+            print("Error: The requested file could not be found.")
+    
+    
+
+while True:
+    print("""1.write
+            2.read
+            3.append
+            4.total
+            5.search expense
+            6.delete expense
+            7.exit""")
+    c = int(input("enter th choice:"))
+    
+    if c == 1:
+        name = input("enter your name:")
+        amt = int(input("enter the amount:"))
+        if amt<0:
+            print("enter the correct amount")
+            break
+        else:
+            write(name,amt)
+    elif c == 2:
+        read()
+    elif c == 3 :
+        name = input("enter your name:")
+        amt = int(input("enter the amount:"))
+        write(name,amt)
+    elif c==4:
+        total()
+    elif c == 5:
+        name = input("enter the you want to search:")
+        search(name)
+
+    elif c == 6:
+        name = input("enter the you want to search:")
+        delete(name)
+
+    elif c == 7:
+        break
+    else:
+        print("wrong choice")
+
