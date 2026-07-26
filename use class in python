@@ -1,0 +1,66 @@
+class BankAccount:
+    def __init__(self,name,balance):
+        self.name = name
+        self.balance = balance
+    def deposit(self,amt):
+        if amt >0 :
+            self.balance += amt
+            print(self.name,"deposited",amt)
+        else :
+            print("please enter valid amount")
+    def withdraw(self,amt):
+        if amt <= self.balance:
+            self.balance -= amt
+            print(self.name,"withdrawn",amt)
+        else:
+            print("Insufficient balance")
+    def check_balance(self):
+        print(self.name,"your balance is :",self.balance)
+    def transfer(self,other_account,amt):
+        print(self.name,"transfer",amt ,"to",other_account.name)
+        self.balance -= amt
+        other_account.balance += amt
+
+urvi = BankAccount("Urvi",5000)
+rahul = BankAccount("Rahul",6000)
+MAX_ATTEMPTS = 3
+PASSWORD = "1234"
+
+authenticated = False
+for attempt in range(MAX_ATTEMPTS):
+    password = input(f"Enter the password (Attempt {attempt + 1} of {MAX_ATTEMPTS}): ")
+    if password == PASSWORD:
+        print("Password is correct!!")
+        authenticated = True
+        break
+    else:
+        remaining_attempts = MAX_ATTEMPTS - 1 - attempt
+        if remaining_attempts > 0:
+            print(f"Wrong password!! only {remaining_attempts} try left")
+        else:
+            print("Account is locked!!")
+if authenticated == True:
+    while True:
+        print("""1.deposit
+        2.withdraw
+        3.check balance
+        4.transfer
+        5.exit""")
+        n = int(input("enter your choice:"))
+
+        if n == 1:
+            amt = int(input("how much you want to deposite:"))
+            urvi.deposit(amt)
+        elif n == 2:
+            amt = int(input("how much you want to withdraw:"))
+            urvi.withdraw(amt)
+        elif n == 3:
+            urvi.check_balance()
+            rahul.check_balance()
+        elif n == 4:
+            am = int(input("how much you want to transfer:"))
+            urvi.transfer(rahul,am)
+        elif n == 5:
+            break
+        else:
+            print("wrong choice!!")
