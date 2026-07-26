@@ -1,0 +1,13 @@
+import random
+import string
+length = int(input("enter the length of password:"))
+Letters = string.ascii_letters
+digits = string.digits
+symbols = string.punctuation
+
+characterList = Letters + digits + symbols
+password = ""
+for i in range(length):
+    character= random.choice(characterList)
+    password += character
+print(password)
